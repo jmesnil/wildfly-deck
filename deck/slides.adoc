@@ -1,6 +1,6 @@
 //= WildFly 8: rapid innovation, lightweight, modular application server
-= What's new in WildFly 8 ?
-Arun Gupta ; Red Hat; @arungupta
+= What's New in WildFly 8 ?
+Jeff Mesnil ; Red Hat; http://jmesnil.net/
 include::attributes.adoc[]
 
 :experimental:
@@ -12,22 +12,20 @@ include::attributes.adoc[]
 :dzslides-transition: fade
 :source-highlighter: coderay
 
-[.topic.source]
-== Arun Gupta
+[.topic]
+== Jeff Mesnil
 
-====
-* Director, Developer Advocacy, Red Hat Inc.
-* O'Reilly and McGraw Hill author
-* Fitness freak
-====
+* Senior software developer, Red Hat Inc.
+* WildFly core developer
+* Amateur Photographer
 
-[NOTE ]
+[NOTE]
 [role="speaker"]
 ====
-* My name is Arun Gupta, and I drive community engagement efforts for JBoss at Red Hat
-* I've authored couple of O'Reilly best selling books and another one by McGraw Hill
-* I'm a workout nut as my kids call me and a runner
+* I am a core developer of WildFly where I also lead the messaging subsystem.
+* I also enjoy to make photographs.
 ====
+
 
 [.topic.source]
 == zeroturnaround.com
@@ -36,13 +34,13 @@ image:zeroturnaround.png[] image:trophy.png[]
 [NOTE]
 [role="speaker"]
 ====
-* What we’re looking at in this part of the report are the real developer concerns and metrics including:
+* This report evaluated the servers according to developer concerns and metrics including:
 ** Ease of download and installation
 ** Real performance metrics
 ** Tooling support
 ** Server Configuration
 * WebLogic and WebSphere were not included as these servers are really targeted for large-enterprises and apps in production rather than lightweight development
-* Each server was ranked from 1 to 5
+* Each server was ranked from 1 to 5 in all these categories
 ====
 
 == !
@@ -55,7 +53,7 @@ image:zeroturnaround.png[] image:trophy.png[]
 Highhlight:
 * JBoss is the winner from all the servers studied
 * Scores range from 1-5 with JBoss never going below 4
-* JBoss AS version ??
+* Consistently good or excellent for developer productivity
 ====
 
 == !
@@ -70,7 +68,7 @@ image::wildfly.png[]
 [NOTE]
 [role="speaker"]
 ====
-Lets take a look at WildFly and what is it!
+Lets take a look at WildFly and what it is!
 ====
 
 == !
@@ -84,7 +82,7 @@ Understand the _new features_ of _WildFly 8_ and revise some of the features _ca
 ====
 * The aim of today's presentation is ...
 * ... to learn the new features of WildFly 8
-* ... learn some of the main features that already existed in AS 7.x and carried forward.
+* ... remind you of the features that already existed in AS 7.x and are still going strong in WildFly 8.
 ====
 
 [.topic]
@@ -102,20 +100,21 @@ Understand the _new features_ of _WildFly 8_ and revise some of the features _ca
 [role="speaker"]
 ====
 * The new name is relevant because it differentiates our community project from the commercial offering. After JBoss AS 7.1.2,the community offering is renamed to WildFly. This is the upstream project for JBoss Enterprise Application Platform. Main focus of WildFly is to meet community demands by rapid releases and latest in innovation. EAP is focused towards a more conservative branch, which is battle-tested for mission critical deployments.
-* WildFly provides a lightweight managed application runtime. WildFly provides a unified management layer fully integrated with all aspects of server and is exposed using a variety of APIs and protocols. These could be used to automate operational needs of any environment – small JVM on a tiny server or thousands of JVM spread across the world.
-* For JBoss, developer is the key. So from the very beginning WildFly is designed to be easy and quick to get going. It offers rapid boot time, excellent developer tooling through not just JBoss Tools project and NetBeans plugin but also community–contributed IntelliJ, and a wide variety of quick start examples.
-* WildFly implements the latest Java EE standards as well as additional open source innovative APIs. While Java EE is the most common usage of WildFly but it is not tied to any particular language or SDK. For example, TorqueBox provides full Ruby-on-Rails experience and is based on WildFly architecture and use many of its core features.
-* The source code is completely open source and available to you for free. If you have an issue with your application, you can attach a debugger and find out what might be causing the issue. You can file a bug, and then send a pull request for the patch to be applied.
+* WildFly provides a lightweight managed application runtime. This unified management layer is fully integrated with all aspects of server and is exposed using a variety of APIs and protocols. These could be used to automate operational needs of any environment – small JVM on a tiny server or thousands of JVM spread across the world on different data centers.
+* For JBoss, developer is the key. So from the very beginning WildFly is designed to be easy and quick to get going. It offers rapid boot time (less than 2 seconds to _fully_ boot on my laptop), excellent developer tooling using the JBoss Tools project. There are also NetBeans and IntelliJ plug-ins that are contributed by the community. WildFly also offers a variety of quick start examples highlightinh its features in a simple fashion.
+* WildFly implements the latest Java EE standards as well as additional open source innovative APIs. While Java EE is the most common usage of WildFly but it is not tied to any particular language or SDK. For example, TorqueBox provides full Ruby-on-Rails experience and is based on WildFly architecture and use many of its core features. We have community projects that offers Scala or Clojure experience while running on WildFly runtime.
+* The source code is completely open source and available to you for free. The source code is hosted on GitHub. If you have an issue with your application, you can attach a debugger and find out what might be causing the issue. You can file a bug, and then send a pull request for the patch to be applied. We welcome contributions of any sort, whether it is a simple bug report or a patch to fix the issue. Do not hesitate to contribute to help us improve the quality of WildFly!
 ====
 
-[.topic.source]
-== WildFly 8 main features
+[.topic]
+== WildFly 8 Main Features
 
 [.incremental]
 * Java EE7 support
 * High performance web server _Undertow_
 * Reduced port usage
-* Role based administration control & auditing
+* Role based access control
+* Auditing
 * Automated patching
 * Minimalistic "core" distribution
 
@@ -124,9 +123,9 @@ Understand the _new features_ of _WildFly 8_ and revise some of the features _ca
 ====
 * WildFly 8 is Java EE 7 compliant and brings all the great technologies added to the platform.
 * It also adds a new high performance and flexible Web server.
-* Another important feature in WildFly is the ability to segment administrative responsibilities based upon different user roles. This allows users to be restricted to specific areas of console such as to deploy an application or access privileged resources. This is commonly called as Role Based Administration Control (RBAC).
-* Also a special audit log with actions of the user is enabled and this log can then be uploaded to a secure location.
-* Automated patching ?
+* Another important feature in WildFly is the ability to segment administrative responsibilities based upon different user roles. This allows users to be restricted to specific areas of console such as to deploy an application or access privileged resources. This is commonly called as Role-Based Access Control (RBAC).
+* a special audit log with actions of the user is enabled and this log can then be uploaded to a secure location.
+* Automated patching to patch running servers (eg to apply critical security patches)
 ====
 
 [.topic.source]
@@ -137,8 +136,10 @@ image::javaee7.png[]
 [role="speaker"]
 ====
 * Java EE 7 is the latest release of the platform and focuses around increasing productivity and embracing HTML5. WildFly 8 is Java EE 7 compliant and so you get all the technologies from the platform here.
-* WebSocket (JSR 356), Batch (JSR 352), JSON (JSR 353), Concurrency Utilities for Java EE (JSR 236) are four new techonlogies in the platform. JAX-RS 2 (JSR 339) and JMS 2 (JSR 343) went through significant updates. CDI 1.1 (JSR 346), Bean Validation 1.1 (JSR 349), JPA 2.1 (JSR 338), JTA 1.2 (JSR 907) also made updates.
-* Lets take a look at some Java EE 7 sample code.
+* WebSocket, Batch, JSON, and Concurrency Utilities are four new technologies in the platform.
+* JAX-RS and JMS went through significant updates.
+* Other APIs also made minor updates.
+* Let's take a look at some Java EE 7 sample code for the new APIS.
 ====
 
 [.topic.source]
@@ -166,7 +167,7 @@ public class ChatEndpoint {
 [NOTE]
 [role="speaker"]
 ====
-* The Java API for WebSocket, WebSocket 1.0, is a key technology for HTML5 support. WebSocket provides a bi-directional and full-duplex communication channel over a sigle TCP connection.
+* WebSocket is a key technology for HTML5. it provides a bi-directional and full-duplex communication channel over a sigle TCP connection between the Web browser and the Web server.
 * Adding `@ServerEndpoint` annotation on a POJO converts it into a WebSocket server endpoint. No additional deployment descriptors are required. The URL at which the endpoint is published is included in the annotation.
 * The POJO method that needs to be invoked is marked with `@OnMessage` and the payload of the message is automatically mapped to the method parameter.
 * First parameter receives the payload, second parameter marks the conversation from the client.
@@ -197,8 +198,8 @@ public class ChatEndpoint {
 [NOTE]
 [role="speaker"]
 ====
-* Batch Processing provides item-oriented (aka chunk, and preferred style) and task-oriented (aka batchlet) processing. This is a job description of chunk processing, aka Job XML.
-* Job XML typically consists of many steps, this canonical sample contains one chunk step.
+* Batch Processing provides item-oriented (aka chunk) and task-oriented  processing. This is a job description of chunk processing.
+* Job XML typically consists of many steps, this sample contains one chunk step.
 * This chunk has a reader, processor, and writer. The ref attribute refers to CDI resolvable bean name bundled with the archive.
 * The item-count attribute defines the chunk size, i.e. the number of items processed at one time.
 * The reader, processor, and writer work together for a chunk number of items at a time.
@@ -229,7 +230,7 @@ writer.write(jsonObject);
 ====
 * JSON is a key technology for data transfer within HTML5 applications. With JSON 1.0, Java EE 7 adds new APIs to enable the parsing and generation of JSON text and objects.
 * JSON API provides streaming and object model API to parse and generate JSON. This is an object-model API sample.
-* `JSONObject` is created and key/value name pairs are added using convenient `add` methods.
+* `JSONObject` is created and key/value name pairs are added using convenient `add` methods. The API is fluent and you can chain method calls.
 * Created object can be written to `java.io.Writer` or `java.io.OutputStream`.
 ====
 
@@ -260,10 +261,10 @@ executor.submit(new MyTask()); <3>
 [role="speaker"]
 ====
 * Concurrency Utilities is a new addition to the Java EE 7 platform and is an extension of the Java SE Concurrency Utilities API. This API provides asynchronous capabilities to Java EE application components, at a lower level than the existing asynch APIs (offered by EJB, Servlet, JAX-RS), and thus gives you a finer-grain level of control and configuration.
-* API provides 4 types of managed objects, one of them is `ManagedExecutorService`.
 * Task can be defined as `Runnable` or `Callable`.
+* API provides 4 types of managed objects, one of them is `ManagedExecutorService`.
 * Platform provides a default instance of `ManagedExecutorService` which can be easily injected using `@Resource`.
-* Usual calls from JSR 166y are now available. All standard Java SE Concurrency APIs and design patterns are available for us. The big difference is that the threads created here are managed by the application server now. The JNDI, class loading, security context information is available to these tasks. This was not available earlier.
+* Usual concurrent API can be used/ All standard Java SE Concurrency APIs and design patterns are available for us. The big difference is that the threads created here are managed by the application server now. The JNDI, class loading, security context information is available to these tasks. This was not available earlier.
 ====
 
 [.topic.source]
@@ -298,50 +299,23 @@ Person p = target
 ** create a `WebTarget`
 ** create a request from the `WebTarget`
 ** submit a request or get a prepared Invocation for later submission
-* The benefits of using a `WebTarget` become apparent when building complex URIs, for example by ex- tending base URIs with additional path segments or templates. Note the use of the URI template parameter `{orderId}`. The exact value of this template parameter is resolved using `resolveTemplate()` method.
-* The response to a request typed in the invocation of `get()` method. In this case, a String representation is returned back. This can also be a POJO where on-the-wire format is converted to POJO using JAX-RS entity providers.
+* The benefits of using a `WebTarget` become apparent when building complex URIs, for example by extending base URIs with additional path segments or templates. Note the use of the URI template parameter `{orderId}`. The exact value of this template parameter is resolved using `resolveTemplate()` method.
+* You can specify the type of the response in the invocation of `get()` method. In this case, the XML response is converted to a `Person` POJO using JAX-RS entity providers.
 ====
 
 [.topic.source]
 == WildFly: Java EE 7 JMS
 
-[source,java]
-.+SendMessage.java+
-----
-@JMSDestinationDefinition(name="myQueue", interfaceName="javax.jms.Queue") <1>
+More on that later...
 
-@Resource(mappedName="myQueue")
-Queue syncQueue;
-
-@Inject
-// @JMSConnectionFactory("java:comp/DefaultJMSConnectionFactory") <2>
-private JMSContext context; <3>
-
-context.createProducer().send(syncQueue, "..."); <4>
-----
-<1> Create destination resource during deployment
-<2> Default JMS connection factory
-<3> Main interface of the simplified API
-<4> Fluent builder API, runtime exceptions
-
-[NOTE]
-[role="speaker"]
-====
-* JMS has undergone a major simplification with the JMS 2.0 by offering the simple and easier-to-use API and  offloading developer tasks onto container services.
-* Sending and receiving a message using JMS 1.1 required a lot of boilerplate code. JMS 2.0 has really fixed this with the addition of the new JMS simplified API and, in particular, the `JMSContext` interface.
-* `JMSContext` combines in a single object the functionality of both the `Connection` and the `Session` in the earlier JMS APIs. A container-managed `JMSContext` instance can be obtained by simply injecting it with the `@Inject` annotation. Notice, no `ConnectionFactory` is specified here. In this case, a default JMS ConnectionFactory is used by and this is defined by the platform.
-* A `Destination`, a `Queue` in this case, is injected using `@Resource`. Even this annotation can be created using newly introduced `@JMSDestinationDefintion` annotation which would automatically create the destination.* Finally, the message is sent using method chaining. For example, create a producer using `createProducer()` and then calling `send()` method to send a message to a destination.
-* Really simple and clean. This also improves semantic readability of your code.
-====
-
-[.topic.source]
+[.topic]
 == WildFly: Java EE 7 IDEs
 
 image:netbeans-wildfly.png[] image:eclipse-wildfly.png[] image:intellij-wildfly.png[]
 image:netbeans-logo.png[] image:jbosstools-logo.png[] image:intellij-logo.png[]
 
-[.topic.source]
-== WildFly: New web server (_Undertow_)
+[.topic]
+== WildFly: New Web Server (_Undertow_)
 
 [.incremental]
 * Flexible and high-performance
@@ -350,18 +324,19 @@ image:netbeans-logo.png[] image:jbosstools-logo.png[] image:intellij-logo.png[]
 * Lightweight & fully embeddable
 * Supports Servlet 3.1 & HTTP upgrade
 * `mod_cluster` supported
+* http://undertow.io
 
 [NOTE]
 [role="speaker"]
 ====
-* Undertow is a flexible performant web server written in java, providing both true blocking and non-blocking API’s based on NIO. It has the ability to scale to a million connections and has impressive numbers on throughput. It also allows us to add support for modern security standards. And since web server is one of the most critical pieces of an application server, writing it a fresh allows us to provide the best possible performance and memory efficiency.
+* Undertow is a flexible performant web server written in java, providing both true blocking and non-blocking API’s based on NIO. It has the ability to scale to a million connections and has impressive numbers on throughput. It also allows us to add support for modern security standards. And since web server is one of the most critical pieces of an application server, writing it from the ground allows us to provide the best possible performance and memory efficiency.
 * Undertow has a composition based architecture that allows you to build a web server by combining small single purpose handlers. The gives you the flexibility to choose between a full Java EE servlet 3.1 container, or a low level non-blocking handler, to anything in between.
-* Undertow is designed to be fully embeddable, with easy to use fluent builder APIs. Undertow’s lifecycle is completely controlled by the embedding application.
-* Undertow provides support for Servlet 3.1, including support for embedded servlet. It is also possible to mix both Servlets and native undertow non-blocking handlers in the same deployment. It allows to upgrade from HTTP to our native protocols.
+* Undertow is designed to be fully embeddable, with easy to use fluent builder APIs. Undertow’s lifecycle is completely controlled by the embedding application. WildFly uses its builder API to integrate it.
+* Undertow provides support for Servlet 3.1. It is also possible to mix both Servlets and native undertow non-blocking handlers in the same deployment. It allows to upgrade from HTTP to other protocols (Web Sockets, WildFly native protocols for EJBs, etc.)
 ====
 
 [.topic.source]
-== WildFly new web server: _Undertow_
+== WildFly New Web Server: _Undertow_
 
 [source,java]
 .+NonBlockingHandler.java+
@@ -381,13 +356,7 @@ Undertow.builder() <1>
 ----
 <1> Same API used for WildFly integration, fluent builder API
 <2> Can create multiple handlers
-<3> Start the handler in JVM
-
-[NOTE]
-[role="speaker"]
-====
-Read through the code ;-)
-====
+<3> Build the server and start to listen for connections
 
 [.topic.source]
 == Undertow benchmarks
@@ -396,14 +365,13 @@ image::undertow-benchmarks.png[1000, 567]
 
 NOTE: http://www.techempower.com/blog/2014/03/04/one-million-http-rps-without-load-balancing-is-easy/
 
-[.topic.source]
-== WildFly: Port reduction
+[.topic]
+== WildFly: Port Reduction
 
 [.incremental]
-* Uses HTTP Upgrade
-* Number of ports in default installation is two
-** _8080_ for applications
-** _9990_ for management
+* HTTP Upgrade to reduce the number of ports in the default installation to just two
+** _8080_ for applications with JNDI, EJB & JMS multiplexed
+** _9990_ for management, for both HTTP/JSON & Native API
 * Only overhead is the initial HTTP Upgrade request/response
 
 [NOTE]
@@ -414,8 +382,8 @@ NOTE: http://www.techempower.com/blog/2014/03/04/one-million-http-rps-without-lo
 * At some point, we may offer a single port mode, to allow all server traffic to go through a single port.
 ====
 
-[.topic.source]
-== WildFly: Role based access control
+[.topic]
+== WildFly: Role Based Access Control
 
 [.incremental]
 * Pre-defined administrative and privileged _Roles_
@@ -427,13 +395,13 @@ NOTE: http://www.techempower.com/blog/2014/03/04/one-million-http-rps-without-lo
 [NOTE]
 [role="speaker"]
 ====
-* Role Based Access Control (RBAC) is the ability to restrict access to system or certain portions of it to authorized users. For JBoss AS 7.x or JBoss EAP 6.0 and 6.1, the web-based administrative console had an all-or-nothing approach. So if a user can authenticate with management security realm, then he'll have all the privileges. This might be OK for smaller deployments but the roles are typically divided for mission critical deployments and a finer-grained control is required.
-* JBoss EAP 6.2 and WildFly 8 introduces RBAC using different roles. There are essential 7 different roles in 2 different categories – administrative and privileged.
+* Role Based Access Control is the ability to restrict access to system or certain portions of it to authorized users. For previous versions of JBoss AS7 and JBoss EAP 6 or 6.1, the web-based administrative console had an all-or-nothing approach. If a user can authenticate with management security realm, then he'll have all the privileges. This might be OK for smaller deployments but the roles are typically divided for mission critical deployments and a finer-grained control is required.
+* JBoss EAP 6.2 and WildFly 8 introduces RBAC using different roles. There are essential 7 different roles in 2 different categories – administrative and privileged.
 * Each Role is defined as a set of Permissions and Permissions specify what Actions are permitted by the logged in user, which is basically lookup, write, or delete.
 ====
 
-[.topic.source]
-== WildFly: Administrative audit logging
+[.topic]
+== WildFly: Administrative Audit Logging
 
 [.incremental]
 * Logging of connection/authentication events
@@ -450,8 +418,8 @@ NOTE: http://www.techempower.com/blog/2014/03/04/one-million-http-rps-without-lo
 * RBAC and Audit Logging certainly makes the server enterprise grade. But EAP (not WildFly) is certify to very military-grade security standards - namely Common Criteria (EAL 4+) so it can be deployed in highly sensitive, restrictive environments; or even banks ;). Features like Audit Logging and RBAC make it possible. 
 ====
 
-[.topic.source]
-== WildFly: Automated patching
+[.topic]
+== WildFly: Automated Patching
 
 [.incremental]
 * Allows libraries and configuration updates in an installation
@@ -466,7 +434,7 @@ NOTE: http://www.techempower.com/blog/2014/03/04/one-million-http-rps-without-lo
 * This feature will be used in future for EAP.
 ====
 
-[.topic.source]
+[.topic]
 == WildFly: Minimalistic "core" distribution
 
 [.incremental]
@@ -487,7 +455,7 @@ NOTE: http://www.techempower.com/blog/2014/03/04/one-million-http-rps-without-lo
 * Built-in lightweight web server (supports the HTTP/JSON management protocol)
 ====
 
-[.topic.source]
+[.topic]
 == WildFly: Miscellaneous
 
 [.incremental]
@@ -509,12 +477,14 @@ NOTE: http://www.techempower.com/blog/2014/03/04/one-million-http-rps-without-lo
 * CMP - JPA offers much more performant and flexible API. JAX-RPC - JAX-WS offers a much more accurate and complete solution. JSR-88 - Very little adoptionr. Most preferred the more complete deployment APIs provided by venders. We decided to completely remove support for these technologies due to the high maintenance cost, low community interest, and much better alternative solutions. If you are not able to port at this time, we recommend looking at JBoss EAP6, which provides long term maintenance and support of these technologies.
 ====
 
-[.topic.source]
+[.topic]
 == WildFly: In the cloud
 
-image:openshift-logo.png[] image:cloudbees-logo.png[]
+image:openshift-logo.png[] 
 
-[.topic.source]
+image:cloudbees-logo.png[]
+
+[.topic]
 == Carry forward from AS 7.x
 
 ====
@@ -532,7 +502,7 @@ image:openshift-logo.png[] image:cloudbees-logo.png[]
 * It provides multiple ways for centralized administration serving different use cases.
 ====
 
-[.topic.source]
+[.topic]
 == Standalone and Managed Domain
 
 [.incremental]
@@ -568,7 +538,7 @@ image::managed-domain.png[]
 * It's important to understand that the choice between a managed domain and standalone servers is all about how your servers are managed, not what capabilities they have to service end user requests. This distinction is particularly important when it comes to high availability clusters. It's important to understand that HA functionality is orthogonal to running standalone servers or a managed domain. That is, a group of standalone servers can be configured to form an HA cluster.
 ====
 
-[.topic.source]
+[.topic]
 == Command Line Interface
 
 [.incremental]
@@ -587,7 +557,7 @@ image::managed-domain.png[]
 * All configuration data is persisted in the backing XML configuration files. These files can be directly manipulated as well but require knowledge about them.
 ====
 
-[.topic.source]
+[.topic]
 == Admin Console
 
 [.incremental]
@@ -620,10 +590,286 @@ image:admin-console.png[]
 _Now available!_
 ====
 
-[.topic.source]
-== Open source polyglot conference
+[.topic]
+== Dive into JMS 2.0
 
-image::devnation_summitpromo.png[]
+* Simplified API
+* JMSContext Injection
+* JMS Resource Definitions
+* Shared Subscription
+* Sending Messages Asynchronously
+* MDB Configuration Properties
+
+
+[.topic]
+== JMS 2.0
+
+* JMS 1.1 - released in March 2002
+* Java 7
+* New Simplified API
+* Compatible with JMS 1.1
+* Fluent API
+* Runtime exceptions
+
+[.topic.source]
+== JMS 2.0 Example
+[source,java]
+.+SendMessage.java+
+----
+@JMSDestinationDefinition(name="myQueue", interfaceName="javax.jms.Queue") <1>
+
+@Resource(mappedName="myQueue")
+Queue queue; <2>
+
+@Inject
+private JMSContext context; <3>
+
+context.createProducer().send(queue, "Hello, JMS 2.0!"); <4>
+----
+<1> Create destination resource during deployment
+<2> Fetch the queue resource
+<3> Main interface of the simplified API
+<4> Fluent builder API, runtime exceptions
+
+[NOTE]
+[role="speaker"]
+====
+* JMS has undergone a major simplification with the JMS 2.0 by offering the simple and easier-to-use API and  offloading developer tasks onto container services.
+* Sending and receiving a message using JMS 1.1 required a lot of boilerplate code. JMS 2.0 has really fixed this with the addition of the new JMS simplified API and, in particular, the `JMSContext` interface.
+* `JMSContext` combines in a single object the functionality of both the `Connection` and the `Session` in the earlier JMS APIs. A container-managed `JMSContext` instance can be obtained by simply injecting it with the `@Inject` annotation. Notice, no `ConnectionFactory` is specified here. In this case, a default JMS ConnectionFactory is used by and this is defined by the platform.
+* A `Destination`, a `Queue` in this case, is injected using `@Resource`. Even this annotation can be created using newly introduced `@JMSDestinationDefintion` annotation which would automatically create the destination.* Finally, the message is sent using method chaining. For example, create a producer using `createProducer()` and then calling `send()` method to send a message to a destination.
+* Really simple and clean. This also improves semantic readability of your code.
+====
+
+[.topic.source]
+== JMS 2.0 Example
+[source,java]
+.+ReceiveMessage.java+
+----
+@Resource(mappedName="myQueue")
+Queue queue;
+
+@Inject
+private JMSContext context;
+
+JMSConsumer consumer = context.createConsumer(queue); <1>
+String text = consumer.receiveBody(String.class, 5000); <2>
+// => "Hello, JMS 2.0!"
+----
+<1> Fluent builder API, runtime exceptions
+<2> No cast required to receive a text message
+
+
+[.topic.source]
+== JMS Destination Definitions
+[source,java]
+.+JMSDefinitions.java+
+----
+@JMSDestinationDefinition(name="myQueue", <1>
+        interfaceName="javax.jms.Queue",  <2>
+        properties = { "durable=false" }  <3>
+)
+
+@JMSDestinationDefinition(name="myTopic",
+        interfaceName="javax.jms.Topic"   <4>
+)
+----
+<1> Name of the destination
+<2> JMS +Queue+
+<3> Provider-specific properties
+<4> JMS +Topic+
+
+[.topic.source]
+== JMS ConnectionFactory Definitions
+[source,java]
+.+JMSDefinitions.java+
+----
+@JMSConnectionFactoryDefinition(name="myFactory", <1>
+        interfaceName = "javax.jms.QueueConnectionFactory", <2>
+        minPoolSize = 5, <3>
+        maxPoolSize = 20,
+        clientId = "myclientID", <4>
+        properties = { "initial-connect-attempts=5" } <5>
+)
+----
+<1> Name of the JMS +ConnectionFactory+
+<2> Type of the connection factory
+<3> Min/Max size of the connection pool
+<4> JMS properties
+<5> Provider-specific properties
+
+[.topic]
+== JMSContext
+
+* Encapsulates both a JMS 1.1 +Connection+ and +Session+
+* +AutoCloseable+
+* Auto-started
+* Injectable in Java EE Web or EJB Containers
+
+[.topic.source]
+== JMS Client with JMSContext
+[source,java]
+.+JMSClient.java+
+----
+ConnectionFactory cf = (ConnectionFactory)namingContext.lookup("..."); <1>
+Destination destination = (Destination)namingContext.lookup("...");
+
+try (JMSContext context = cf.createContext(userName, password)) { <2>
+  context.createProducer().send(destination, "hello");
+
+  JMSConsumer consumer = context.createConsumer(destination); <3>
+  String response = consumer.receiveBody(String.class, 5000);
+}
+----
+<1> Usual JNDI lookup to get the JMS Connection Factory & Destinations
+<2> +try-with-resources+ statement to auto close the context
+<3> Context is automatically started when a consumer is created
+
+[.topic.source]
+== JMS Context Injection
+
+[source,java]
+.+JMSClient.java+
+----
+@Inject
+// @JMSConnectionFactory("java:comp/DefaultJMSConnectionFactory") <1>
+@JMSConnectionFactory("myFactory") <2>
+@JMSPasswordCredential(userName="guest",password="password") <3>
+@JMSSessionMode(JMSContext.AUTO_ACKNOWLEDGE) <4>
+private JMSContext context;
+----
+<1> Java EE 7 Default JMS Connection Factory...
+<2> ... or you use your own
+<3> User credentials
+<4> Acknowledgement mode / Transactional behaviour
+
+[.topic]
+== Shared Subscription
+
+* Restriction in JMS 1.1
+** No more than *one* consumer for a topic subscription
+*** Impossible in Java SE application / multiple JVMs
+*** Possible in a Java EE application using a pool of MDB
+
+----
+                                    M       +------------+
+                              ------------> | consumer 1 |
++----------+  M   +-------+ /               +------------+
+| producer | ---> | topic |
++----------+      +-------+ \       M       +------------+
+                              ------------> | consumer 2 |
+                                            +------------+
+----
+
+
+[.topic]
+== Shared Subscription
+
+* Multiple consumers on the same topic subscription
+
+----
+                                       M          +------------+
+                                ----------------> | consumer 1 |
+                              /                   +------------+
+                             /                    +------------+
++----------+  M   +-------+ /                ---> | consumer 2 |
+| producer | ---> | topic |                /      +------------+
++----------+      +-------+ \             /   M   +------------+
+                              << mysub >> -- ---> | consumer 3 |
+                                          \       +------------+
+                                           \      +------------+
+                                             ---> | consumer 4 |
+                                                  +------------+
+----
+
+* Durable / Non-durable shared consumers
+
+[.topic.source]
+== Shared Subscription
+
+[source,java]
+.+SharedSubscription.java+
+----
+@Resource(mappedName="myTopic")
+Topic topic;
+
+@Inject
+private JMSContext context;
+
+String subscription = "...";
+
+JMSConsumer consumer = context.createSharedConsumer(topic, subscription); <1>
+
+context.setClientID("...");
+JMSConsumer durableConsumer = context.createSharedDurableConsumer(topic, subscription); <2>
+----
+<1> Non-durable shared consumer (topic + subscription)
+<2> Durable shared consumer (topic + subscription + clientID)
+
+[.topic.source]
+== Sending Messages Asynchronously
+
+[source,java]
+.+SendAsynchronously.java+
+----
+JMSProducer producer = context.createProducer()
+    .setAsync(new CompletionListener() { <1>
+        @Override
+        public void onCompletion(Message message) { } <2>
+
+        @Override
+        public void onException(Message message, Exception exception) { } <3>
+    });
+producer.send(destination, "Hello, Async!"); <4>
+----
+<1> Callback for completion
+<2> Called when a message was sent successfully
+<3> Called when a problem occurred and prevent the message to be sent
+<4> Send the message asynchronously
+
+[.topic]
+== MDB Configuration Properties
+
+[.incremental]
+* Java EE 6
+** +acknowledgeMode+
+** +messageSelector+
+** +destinationType+
+** +subscriptionDurability+
+* Java EE7
+** +destinationLookup+
+** +connectionFactoryLookup+
+** +clientId+
+** +subscriptionName+
+
+[.topic.source]
+== MDB Configuration Properties
+
+[source,java]
+.+MDB.java+
+----
+@MessageDriven(name = "MyMDB", activationConfig = {
+    @ActivationConfigProperty(propertyName = "connectionFactoryLookup", <1>
+                             propertyValue = "jms/MyConnectionFactory"),
+    @ActivationConfigProperty(propertyName = "destinationType",
+                             propertyValue = "javax.jms.Queue"),
+    @ActivationConfigProperty(propertyName = "destinationLookup", <2>
+                             propertyValue = "myQueue"),
+    @ActivationConfigProperty(propertyName = "acknowledgeMode",
+                             propertyValue = "Auto-acknowledge") })
+public class MyMDB implements MessageListener {
+
+    public void onMessage(Message message) { ... }
+}
+----
+<1> standard portable property to lookup the connection factory
+<2> standard portable property to lookup the destination
+
+[.topic]
+== Q&A ?
+
+[.incremental]
+* Thanks!
 
 [.topic.source]
 == References
@@ -639,8 +885,8 @@ NOTE: Slides generated with Asciidoctor and DZSlides backend
 NOTE: Original slide template - Dan Allen & Sarah White
 
 [.topic.ending, hrole="name"]
-== Arun Gupta
+== Jeff Mesnil
 
 [.footer]
-[icon-twitter]'{zwsp}' @arungupta
+http://jmesnil.net/
 
