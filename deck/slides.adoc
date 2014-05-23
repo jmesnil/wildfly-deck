@@ -18,6 +18,7 @@ include::attributes.adoc[]
 * Senior software developer, Red Hat Inc.
 * WildFly core developer
 * Amateur Photographer
+* Lives in France
 
 [NOTE]
 [role="speaker"]
@@ -26,6 +27,16 @@ include::attributes.adoc[]
 * I also enjoy to make photographs.
 ====
 
+== !
+
+[.middle]
+image::antipode.png[]
+
+[NOTE]
+[role="speaker"]
+====
+* I live almost at the antipode of New Zealand, I could never go further away from my home than visiting you.
+====
 
 [.topic.source]
 == zeroturnaround.com
