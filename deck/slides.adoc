@@ -1,5 +1,5 @@
-//= WildFly 8: rapid innovation, lightweight, modular application server
-= What's New in WildFly 8 ?
+//= WildFly 8.x: rapid innovation, lightweight, modular application server
+= What's New in WildFly 8.x ?
 Emmanuel Hugonnet - Jeff Mesnil ; Red Hat;
 include::attributes.adoc[]
 
@@ -13,14 +13,18 @@ include::attributes.adoc[]
 :source-highlighter: coderay
 
 [.topic]
-== Emmanuel Hugonnet
+== Emmanuel Hugonnet (@ehsavoie) image:batux-chimie-tux.png[ehsavoie,60,60,float="right",align="top"]
 
 * Senior software developer, Red Hat Inc.
 * WildFly core developer
+* WildFly Netbeans plugin developer
 
 [NOTE]
 [role="speaker"]
 ====
+* I am the "new kid" on the Management API
+* Yes I contribute on Netbeans IDE !
+* AlpesJUG leader
 ====
 
 [.topic]
