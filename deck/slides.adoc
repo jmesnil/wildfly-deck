@@ -30,6 +30,7 @@ include::attributes.adoc[]
 * WildFly core developer
 * O'Reilly author
 * Amateur Photographer
+* http://jmesnil.net[jmesnil.net]
 
 [NOTE]
 [role="speaker"]
@@ -347,7 +348,7 @@ context.createProducer().send(syncQueue, "..."); <4>
 * Really simple and clean. This also improves semantic readability of your code.
 ====
 
-[.topic.source]
+[.topic]
 == Java Transaction API 1.2 (JSR 907)
 
 * `@Transactional` Transaction boundaries on CDI managed beans
@@ -362,8 +363,8 @@ context.createProducer().send(syncQueue, "..."); <4>
 * The javax.transaction.TransactionScoped annotation provides the ability to specify a standard CDI scope to define bean instances whose lifecycle is scoped to the currently active JTA transaction. This annotation has no effect on classes which have non-contextual references such those defined as managed beans by the Java EE specification .
 ====
 
-[.topic.source]
-== Contexts and Dependency Injection 1.1 (JSR 346)
+[.topic]
+== CDI 1.1 (JSR 346)
 
 * Automatic enablement for beans with scope annotation and EJBs
 * ``beans.xml'' is optional
@@ -664,8 +665,10 @@ NOTE: http://zeroturnaround.com/rebellabs/abandon-fish-migrating-from-glassfish-
 "the most logical decision when migrating from GlassFish is opting for an *equivalent open source alternative*"
 -- zeroturnaround.com
 
-[.topic.source]
-== JBoss/WildFly or TomEE chosen because ...
+[.topic]
+== WildFly or TomEE chosen because ...
+
+[.incremental]
 * Vibrant developer community
 * Amount of documentation on the web
 * Sponsorship and support by market leaders
@@ -674,14 +677,14 @@ NOTE: http://zeroturnaround.com/rebellabs/abandon-fish-migrating-from-glassfish-
 == WildFly is:
 
 ====
+[.incremental]
 * Java EE 7 compliant
 * lightweight
 * managable
 * highly scalable
 * open source
 * application server
-
-_Now available!_
+* _Now available!_
 ====
 
 [.topic]
@@ -704,8 +707,7 @@ NOTE: Slides generated with Asciidoctor and DZSlides backend
 NOTE: Original slide template - Dan Allen & Sarah White
 
 [.topic.ending, hrole="name"]
-== Jeff Mesnil
+== Emmanuel Hugonnet - Jeff Mesnil
 
 [.footer]
-http://jmesnil.net/
-
+@ehsavoie - @jmesnil
