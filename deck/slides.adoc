@@ -1,6 +1,6 @@
 //= WildFly 8: rapid innovation, lightweight, modular application server
 = What's New in WildFly 8 ?
-Jeff Mesnil ; Red Hat; http://jmesnil.net/
+Emmanuel Hugonnet - Jeff Mesnil ; Red Hat;
 include::attributes.adoc[]
 
 :experimental:
@@ -13,10 +13,22 @@ include::attributes.adoc[]
 :source-highlighter: coderay
 
 [.topic]
+== Emmanuel Hugonnet
+
+* Senior software developer, Red Hat Inc.
+* WildFly core developer
+
+[NOTE]
+[role="speaker"]
+====
+====
+
+[.topic]
 == Jeff Mesnil
 
 * Senior software developer, Red Hat Inc.
 * WildFly core developer
+* O'Reilly author
 * Amateur Photographer
 
 [NOTE]
@@ -304,9 +316,72 @@ Person p = target
 ====
 
 [.topic.source]
-== WildFly: Java EE 7 JMS
+== WildFly: Java EE 7 JMS (JSR 343)
 
-More on that later...
+[source,java]
+.+SendMessage.java+
+----
+@JMSDestinationDefinition(name="myQueue", interfaceName="javax.jms.Queue") <1>
+
+@Resource(mappedName="myQueue")
+Queue syncQueue;
+
+@Inject
+// @JMSConnectionFactory("java:comp/DefaultJMSConnectionFactory") <2>
+private JMSContext context; <3>
+
+context.createProducer().send(syncQueue, "..."); <4>
+----
+<1> Create destination resource during deployment
+<2> Default JMS connection factory
+<3> Main interface of the simplified API
+<4> Fluent builder API, runtime exceptions
+
+[NOTE]
+[role="speaker"]
+====
+* JMS has undergone a major simplification with the JMS 2.0 by offering the simple and easier-to-use API and  offloading developer tasks onto container services.
+* Sending and receiving a message using JMS 1.1 required a lot of boilerplate code. JMS 2.0 has really fixed this with the addition of the new JMS simplified API and, in particular, the `JMSContext` interface.
+* `JMSContext` combines in a single object the functionality of both the `Connection` and the `Session` in the earlier JMS APIs. A container-managed `JMSContext` instance can be obtained by simply injecting it with the `@Inject` annotation. Notice, no `ConnectionFactory` is specified here. In this case, a default JMS ConnectionFactory is used by and this is defined by the platform.
+* A `Destination`, a `Queue` in this case, is injected using `@Resource`. Even this annotation can be created using newly introduced `@JMSDestinationDefintion` annotation which would automatically create the destination.* Finally, the message is sent using method chaining. For example, create a producer using `createProducer()` and then calling `send()` method to send a message to a destination.
+* Really simple and clean. This also improves semantic readability of your code.
+====
+
+[.topic.source]
+== Java Transaction API 1.2 (JSR 907)
+
+* `@Transactional` Transaction boundaries on CDI managed beans
+* `@TransactionScoped` CDI scope for bean instances scoped to the active JTA transaction
+
+
+[NOTE]
+[role="speaker"]
+====
+* A significant change in JTA allows to convert any POJO into a transactional object.
+* The javax.transaction.Transactional annotation provides the application the ability to declaratively control transaction boundaries on CDI managed beans, as well as classes defined as managed beans by the Java EE specification, at both the class and method level where method level annotations override those at the class level.·
+* The javax.transaction.TransactionScoped annotation provides the ability to specify a standard CDI scope to define bean instances whose lifecycle is scoped to the currently active JTA transaction. This annotation has no effect on classes which have non-contextual references such those defined as managed beans by the Java EE specification .
+====
+
+[.topic.source]
+== Contexts and Dependency Injection 1.1 (JSR 346)
+
+* Automatic enablement for beans with scope annotation and EJBs
+* ``beans.xml'' is optional
+* Bean discovery mode
+** `all`: All types
+** `annotated`: Types with bean defining annotation
+** `none`: Disable CDI
+* `@Vetoed` for programmatic disablement of classes
+* Global ordering/priority of interceptors and decorators
+
+[NOTE]
+[role="speaker"]
+====
+* CDI is making the platform lot more cohesive and is becoming a core component model.
+* Also, CDI is now enabled by default in Java EE 7, without the requirement to specify a beans.xml descriptor.·
+* If beans.xml exists with version 1.1, then a new attribute bean-discovery-mode can be specified on the top level <beans>. “all” value can be specified to enable injection all beans in the archive. “annotated” value is used to inject beans with a bean defining annotation – such as one with a CDI scope. And “none” can be used to completely disable CDI.
+* A new annotation @Vetoed is added to enable programmatic disablement of classes. This functionality was available in other frameworks and now in the standards.
+====
 
 [.topic]
 == WildFly: Java EE 7 IDEs
@@ -576,6 +651,25 @@ image:admin-console.png[]
 * The Admin Console is a responsive web-based administration console and provides a GUI for all administration tasks.
 ====
 
+[.topic.source]
+== Migrate to WildFly
+
+image::glassfish-dish.png[700, 364]
+
+NOTE: http://wildfly.org/news/2014/02/06/GlassFish-to-WildFly-migration/
+
+NOTE: http://zeroturnaround.com/rebellabs/abandon-fish-migrating-from-glassfish-to-jboss-or-tomee/
+
+== !
+"the most logical decision when migrating from GlassFish is opting for an *equivalent open source alternative*"
+-- zeroturnaround.com
+
+[.topic.source]
+== JBoss/WildFly or TomEE chosen because ...
+* Vibrant developer community
+* Amount of documentation on the web
+* Sponsorship and support by market leaders
+
 [.topic.recap]
 == WildFly is:
 
@@ -589,281 +683,6 @@ image:admin-console.png[]
 
 _Now available!_
 ====
-
-[.topic]
-== Dive into JMS 2.0
-
-* Simplified API
-* JMSContext Injection
-* JMS Resource Definitions
-* Shared Subscription
-* Sending Messages Asynchronously
-* MDB Configuration Properties
-
-
-[.topic]
-== JMS 2.0
-
-* JMS 1.1 - released in March 2002
-* Java 7
-* New Simplified API
-* Compatible with JMS 1.1
-* Fluent API
-* Runtime exceptions
-
-[.topic.source]
-== JMS 2.0 Example
-[source,java]
-.+SendMessage.java+
-----
-@JMSDestinationDefinition(name="myQueue", interfaceName="javax.jms.Queue") <1>
-
-@Resource(mappedName="myQueue")
-Queue queue; <2>
-
-@Inject
-private JMSContext context; <3>
-
-context.createProducer().send(queue, "Hello, JMS 2.0!"); <4>
-----
-<1> Create destination resource during deployment
-<2> Fetch the queue resource
-<3> Main interface of the simplified API
-<4> Fluent builder API, runtime exceptions
-
-[NOTE]
-[role="speaker"]
-====
-* JMS has undergone a major simplification with the JMS 2.0 by offering the simple and easier-to-use API and  offloading developer tasks onto container services.
-* Sending and receiving a message using JMS 1.1 required a lot of boilerplate code. JMS 2.0 has really fixed this with the addition of the new JMS simplified API and, in particular, the `JMSContext` interface.
-* `JMSContext` combines in a single object the functionality of both the `Connection` and the `Session` in the earlier JMS APIs. A container-managed `JMSContext` instance can be obtained by simply injecting it with the `@Inject` annotation. Notice, no `ConnectionFactory` is specified here. In this case, a default JMS ConnectionFactory is used by and this is defined by the platform.
-* A `Destination`, a `Queue` in this case, is injected using `@Resource`. Even this annotation can be created using newly introduced `@JMSDestinationDefintion` annotation which would automatically create the destination.* Finally, the message is sent using method chaining. For example, create a producer using `createProducer()` and then calling `send()` method to send a message to a destination.
-* Really simple and clean. This also improves semantic readability of your code.
-====
-
-[.topic.source]
-== JMS 2.0 Example
-[source,java]
-.+ReceiveMessage.java+
-----
-@Resource(mappedName="myQueue")
-Queue queue;
-
-@Inject
-private JMSContext context;
-
-JMSConsumer consumer = context.createConsumer(queue); <1>
-String text = consumer.receiveBody(String.class, 5000); <2>
-// => "Hello, JMS 2.0!"
-----
-<1> Fluent builder API, runtime exceptions
-<2> No cast required to receive a text message
-
-
-[.topic.source]
-== JMS Destination Definitions
-[source,java]
-.+JMSDefinitions.java+
-----
-@JMSDestinationDefinition(name="myQueue", <1>
-        interfaceName="javax.jms.Queue",  <2>
-        properties = { "durable=false" }  <3>
-)
-
-@JMSDestinationDefinition(name="myTopic",
-        interfaceName="javax.jms.Topic"   <4>
-)
-----
-<1> Name of the destination
-<2> JMS +Queue+
-<3> Provider-specific properties
-<4> JMS +Topic+
-
-[.topic.source]
-== JMS ConnectionFactory Definitions
-[source,java]
-.+JMSDefinitions.java+
-----
-@JMSConnectionFactoryDefinition(name="myFactory", <1>
-        interfaceName = "javax.jms.QueueConnectionFactory", <2>
-        minPoolSize = 5, <3>
-        maxPoolSize = 20,
-        clientId = "myclientID", <4>
-        properties = { "initial-connect-attempts=5" } <5>
-)
-----
-<1> Name of the JMS +ConnectionFactory+
-<2> Type of the connection factory
-<3> Min/Max size of the connection pool
-<4> JMS properties
-<5> Provider-specific properties
-
-[.topic]
-== JMSContext
-
-* Encapsulates both a JMS 1.1 +Connection+ and +Session+
-* +AutoCloseable+
-* Auto-started
-* Injectable in Java EE Web or EJB Containers
-
-[.topic.source]
-== JMS Client with JMSContext
-[source,java]
-.+JMSClient.java+
-----
-ConnectionFactory cf = (ConnectionFactory)namingContext.lookup("..."); <1>
-Destination destination = (Destination)namingContext.lookup("...");
-
-try (JMSContext context = cf.createContext(userName, password)) { <2>
-  context.createProducer().send(destination, "hello");
-
-  JMSConsumer consumer = context.createConsumer(destination); <3>
-  String response = consumer.receiveBody(String.class, 5000);
-}
-----
-<1> Usual JNDI lookup to get the JMS Connection Factory & Destinations
-<2> +try-with-resources+ statement to auto close the context
-<3> Context is automatically started when a consumer is created
-
-[.topic.source]
-== JMS Context Injection
-
-[source,java]
-.+JMSClient.java+
-----
-@Inject
-// @JMSConnectionFactory("java:comp/DefaultJMSConnectionFactory") <1>
-@JMSConnectionFactory("myFactory") <2>
-@JMSPasswordCredential(userName="guest",password="password") <3>
-@JMSSessionMode(JMSContext.AUTO_ACKNOWLEDGE) <4>
-private JMSContext context;
-----
-<1> Java EE 7 Default JMS Connection Factory...
-<2> ... or you use your own
-<3> User credentials
-<4> Acknowledgement mode / Transactional behaviour
-
-[.topic]
-== Shared Subscription
-
-* Restriction in JMS 1.1
-** No more than *one* consumer for a topic subscription
-*** Impossible in Java SE application / multiple JVMs
-*** Possible in a Java EE application using a pool of MDB
-
-----
-                                    M       +------------+
-                              ------------> | consumer 1 |
-+----------+  M   +-------+ /               +------------+
-| producer | ---> | topic |
-+----------+      +-------+ \       M       +------------+
-                              ------------> | consumer 2 |
-                                            +------------+
-----
-
-
-[.topic]
-== Shared Subscription
-
-* Multiple consumers on the same topic subscription
-
-----
-                                       M          +------------+
-                                ----------------> | consumer 1 |
-                              /                   +------------+
-                             /                    +------------+
-+----------+  M   +-------+ /                ---> | consumer 2 |
-| producer | ---> | topic |                /      +------------+
-+----------+      +-------+ \             /   M   +------------+
-                              << mysub >> -- ---> | consumer 3 |
-                                          \       +------------+
-                                           \      +------------+
-                                             ---> | consumer 4 |
-                                                  +------------+
-----
-
-* Durable / Non-durable shared consumers
-
-[.topic.source]
-== Shared Subscription
-
-[source,java]
-.+SharedSubscription.java+
-----
-@Resource(mappedName="myTopic")
-Topic topic;
-
-@Inject
-private JMSContext context;
-
-String subscription = "...";
-
-JMSConsumer consumer = context.createSharedConsumer(topic, subscription); <1>
-
-context.setClientID("...");
-JMSConsumer durableConsumer = context.createSharedDurableConsumer(topic, subscription); <2>
-----
-<1> Non-durable shared consumer (topic + subscription)
-<2> Durable shared consumer (topic + subscription + clientID)
-
-[.topic.source]
-== Sending Messages Asynchronously
-
-[source,java]
-.+SendAsynchronously.java+
-----
-JMSProducer producer = context.createProducer()
-    .setAsync(new CompletionListener() { <1>
-        @Override
-        public void onCompletion(Message message) { } <2>
-
-        @Override
-        public void onException(Message message, Exception exception) { } <3>
-    });
-producer.send(destination, "Hello, Async!"); <4>
-----
-<1> Callback for completion
-<2> Called when a message was sent successfully
-<3> Called when a problem occurred and prevent the message to be sent
-<4> Send the message asynchronously
-
-[.topic]
-== MDB Configuration Properties
-
-[.incremental]
-* Java EE 6
-** +acknowledgeMode+
-** +messageSelector+
-** +destinationType+
-** +subscriptionDurability+
-* Java EE7
-** +destinationLookup+
-** +connectionFactoryLookup+
-** +clientId+
-** +subscriptionName+
-
-[.topic.source]
-== MDB Configuration Properties
-
-[source,java]
-.+MDB.java+
-----
-@MessageDriven(name = "MyMDB", activationConfig = {
-    @ActivationConfigProperty(propertyName = "connectionFactoryLookup", <1>
-                             propertyValue = "jms/MyConnectionFactory"),
-    @ActivationConfigProperty(propertyName = "destinationType",
-                             propertyValue = "javax.jms.Queue"),
-    @ActivationConfigProperty(propertyName = "destinationLookup", <2>
-                             propertyValue = "myQueue"),
-    @ActivationConfigProperty(propertyName = "acknowledgeMode",
-                             propertyValue = "Auto-acknowledge") })
-public class MyMDB implements MessageListener {
-
-    public void onMessage(Message message) { ... }
-}
-----
-<1> standard portable property to lookup the connection factory
-<2> standard portable property to lookup the destination
 
 [.topic]
 == Q&A ?
