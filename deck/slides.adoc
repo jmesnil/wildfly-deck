@@ -465,20 +465,7 @@ NOTE: http://www.techempower.com/blog/2014/03/04/one-million-http-rps-without-lo
 [.topic]
 == WildFly: Role Based Access Control
 
-[.incremental]
-* Pre-defined administrative and privileged _Roles_
-** Monitor, Operator, Maintainer, Deployer, Administrator, Auditor, Super User
-* Roles is a set of _Permissions_
-* Permissions specify which _Actions_ (lookup, read, write) are allowed on resources
-* _Users_ or _Groups_ are defined in Roles
-
-[NOTE]
-[role="speaker"]
-====
-* Role Based Access Control is the ability to restrict access to system or certain portions of it to authorized users. For previous versions of JBoss AS7 and JBoss EAP 6 or 6.1, the web-based administrative console had an all-or-nothing approach. If a user can authenticate with management security realm, then he'll have all the privileges. This might be OK for smaller deployments but the roles are typically divided for mission critical deployments and a finer-grained control is required.
-* JBoss EAP 6.2 and WildFly 8 introduces RBAC using different roles. There are essential 7 different roles in 2 different categories – administrative and privileged.
-* Each Role is defined as a set of Permissions and Permissions specify what Actions are permitted by the logged in user, which is basically lookup, write, or delete.
-====
+* Dimitris will present it and make a demo
 
 [.topic]
 == WildFly: Administrative Audit Logging
